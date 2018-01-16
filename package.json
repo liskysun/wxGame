@@ -1,27 +1,33 @@
 {
-  "name": "jsnes",
-  "version": "0.3.0",
-  "description": "A JavaScript NES emulator",
-  "homepage": "https://github.com/bfirsh/jsnes",
-  "author": "Ben Firshman <ben@firshman.co.uk> (https://fir.sh)",
-  "main": "src/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/bfirsh/jsnes.git"
-  },
-  "license": "GPL-3.0",
-  "scripts": {
-    "build": "webpack",
-    "test": "mocha ./test/*.spec.js",
-    "test:watch": "mocha -w ./test/*.spec.js",
-    "prepublish": "npm run build"
+  "name": "jsnes-web",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "4.0.0-beta",
+    "jsnes": "git://github.com/bfirsh/jsnes.git",
+    "node-sass-chokidar": "^0.0.3",
+    "npm-run-all": "^4.1.2",
+    "react": "^15.6.2",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-addons-transition-group": "^15.6.2",
+    "react-dom": "^15.6.2",
+    "react-ga": "^2.2.0",
+    "react-router-dom": "^4.2.2",
+    "reactstrap": "^4.8.0",
+    "ringbufferjs": "git://github.com/bfirsh/ringbufferjs.git#add-peek-count"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "jshint": "^2.9.5",
-    "jshint-loader": "^0.8.4",
-    "mocha": "^4.1.0",
-    "sinon": "^4.1.4",
-    "webpack": "^3.9.1"
+    "canvas-prebuilt": "1.6.0",
+    "react-scripts": "1.0.17"
+  },
+  "scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm run build-css && react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }

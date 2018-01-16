@@ -1,6 +1,4 @@
-._*
-.DS_Store
-/dist
-/local-roms
+/build
 /node_modules
-/tmp
+/public/roms/local
+/src/index.css

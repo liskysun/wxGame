@@ -1,0 +1,215 @@
+    body {
+        background: white !important;
+    }
+
+    button {
+        height: 100% !important;
+        width: 100% !important;
+        opacity: 0;
+        color: white;
+    }
+    
+    button:active {
+        opacity: 0.5;
+    }
+
+    .mb-4 a {
+        color: black;
+    }
+
+    .container {
+        color: black;
+    }
+
+    .navbar {
+        display: none !important;
+    }
+
+    .list-group-item {
+        background-color: white !important;
+    }
+
+    #pause-btn {
+        color: black;
+        border: 1px black solid;
+    }
+
+    #control-btn {
+        color: black;
+        border: 1px black solid;
+    }
+
+    #back-link {
+        color: black;
+    }
+
+    .screen-container {
+        position: relative;
+    }
+
+    .Screen {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    #key-btn {
+        position: relative;
+        text-align: center;
+        margin: 0 auto;
+        margin-top: 5px;
+        width: 98%;
+        height: 50%;
+        color: black;
+        /*border: 1px #000000 solid;*/
+    }
+
+    #key-btn button {
+        position: relative;
+    }
+
+/*    #key-btn button:active {
+        opacity: 0.4;
+    }*/
+
+    #key-btn div {
+        /*border: 1px #000000 solid;*/
+        background-size: 100% 100% !important;
+    }
+
+    .key-top-region {
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+        height: 25%;
+    }
+
+    .key-bottom-region {
+        height: 75%;
+    }
+
+    #back-img {
+        display: none;
+        float: left;
+        width: 15%;
+        height: 45%;
+        border: 0px solid;
+        text-decoration: none !important;
+        background: url(img/back.png) no-repeat;
+    }
+
+    .keys-start,
+    .keys-select {
+        display: inline-block;
+        width: 29%;
+        height: 65%;
+    }
+
+    .direction-keys,
+    .function-keys {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .direction-keys {
+        width: 65%;
+        height: 100%;
+    }
+
+    .function-keys {
+        width: 35%;
+        height: 100%;
+    }
+
+    .keys-up,
+    .keys-down {
+        width: 25%;
+        height: 37.5%;
+        margin-left: 38%;
+    }
+
+    .keys-left,
+    .keys-right {
+        display: inline-block;
+        width: 42%;
+        height: 25%;
+    }
+
+    .keys-b,
+    .keys-a {
+        width: 64%;
+        height: 38%;
+    }
+
+    #a-btn {
+        width: 75%;
+        height: 88%;
+        border: 0px solid;
+    }
+
+    .keys-a {
+        margin-left: 35%;
+        background-image: url(img/key-a.png);
+    }
+
+    #b-btn {
+        width: 75%;
+        height: 88%;
+        float: left;
+        border: 0px solid;
+    }
+    .keys-b {
+        margin-top: 20%;
+        background: url(img/key-b.png) no-repeat;
+    }
+    #start-btn {
+        width: 50%;
+        height: 79%;
+        border: 0px solid;
+    }
+    .keys-start {
+        margin-right: 20%;
+        background: url(img/key-start.png) no-repeat;
+    }
+    #select-btn {
+        width: 50%;
+        height: 79%;
+        border: 0px solid;
+    }
+    .keys-select {
+        background: url(img/key-select.png) no-repeat;
+    }
+    #down-btn {
+        width: 23%;
+        height: 100%;
+        border: 0px solid;
+    }
+    .keys-down {
+        background: url(img/key-down.png) no-repeat;
+    }
+
+    #up-btn {
+        width: 23%;
+        height: 100%;
+        border: 0px solid;
+    }
+    .keys-up {
+        background: url(img/key-up.png) no-repeat;
+    }
+    #left-btn {
+        height: 100%;
+        width: 61%;
+        border: 0px solid;
+    }
+    .keys-left {
+        background: url(img/key-left.png) no-repeat;
+    }
+
+    #right-btn {
+        height: 100%;
+        width: 61%;
+        border: 0px solid;
+    }
+    .keys-right {
+        margin-left: 7%;
+        background: url(img/key-right.png) no-repeat;
+    }
