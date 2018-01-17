@@ -30,7 +30,7 @@ export default class Speakers {
 
   writeSample = (left, right) => {
     if (this.buffer.size() / 2 >= this.bufferSize) {
-      console.log(`Buffer overrun`);
+      // console.log(`Buffer overrun`);
     }
     this.buffer.enq(left);
     this.buffer.enq(right);
@@ -55,7 +55,7 @@ export default class Speakers {
       // ignore empty buffers... assume audio has just stopped
       var bufferSize = this.buffer.size() / 2;
       if (bufferSize > 0) {
-        console.log(`Buffer underrun (needed ${size}, got ${bufferSize})`);
+        // console.log(`Buffer underrun (needed ${size}, got ${bufferSize})`);
       }
       for (var j = 0; j < size; j++) {
         left[j] = 0;

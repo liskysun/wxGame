@@ -201,16 +201,29 @@ class RunPage extends Component {
                   >
                   </Button>
                 </div>
-                <div className="keys-a" id="test-a">
-                  <Button
-                    outline
-                    color="primary"
-                    id="a-btn"
-                    onClick={this.vitualJump}
-                  >
-                  </Button>
-                </div>
+                <div className="keys-ac">
+                
+                  <div className="keys-a">
+                    <Button
+                      outline
+                      color="primary"
+                      id="a-btn"
+                      onClick={this.vitualJump}
+                    >
+                    </Button>
+                  </div>
+                  <div className="keys-c">
+                    <Button
+                      outline
+                      color="primary"
+                      id="c-btn"
+                      onClick={this.vitualJump}
+                    >
+                    </Button>
+                  </div>
 
+
+                </div>
               </div>
           </div>
           </div>
@@ -281,6 +294,8 @@ class RunPage extends Component {
     document.getElementById("start-btn").addEventListener("mouseup",this.keyboardController.startUp);
     document.getElementById("a-btn").addEventListener("touchstart",this.keyboardController.aDown);
     document.getElementById("a-btn").addEventListener("touchend",this.keyboardController.aUp);
+    document.getElementById("c-btn").addEventListener("touchstart",this.keyboardController.cDown);
+    document.getElementById("c-btn").addEventListener("touchend",this.keyboardController.cUp);
     // document.getElementById("test-a").addEventListener("touchstart",this.keyboardController.aDown);
     // document.getElementById("test-a").addEventListener("touchend",this.keyboardController.aUp);
     document.getElementById("b-btn").addEventListener("touchstart",this.keyboardController.bDown);
@@ -311,10 +326,10 @@ class RunPage extends Component {
   }
 
   load = () => {
-
+    document.oncontextmenu = function (e) { e.preventDefault();};
     var noTouch = document.getElementById("no-touch-move");
     noTouch.ontouchmove = function(e){ e.preventDefault(); };
-
+    document.oncontextmenu = function (e) { e.preventDefault();};
     if (this.props.match.params.rom) {
       const path = config.BASE_ROM_URL + this.props.match.params.rom;
       console.log(path);
@@ -337,7 +352,6 @@ class RunPage extends Component {
   };
 
   handleLoaded = data => {
-    //ÍÏ×§¼ÓÔØ
     this.setState({ uiEnabled: true, running: true });
     this.nes.loadROM(data);
     this.start();
@@ -378,7 +392,21 @@ class RunPage extends Component {
     // let screenHeight = 0.5*window.innerHeight;
     // keyBtnObj.style.height = windowHeight - screenHeight + "px";
     // this.screenContainer.style.height = `${window.innerHeight * 0.5}px`;
-
+    // var winInnerHeight = window.innerHeight;
+    // var documentElementclientHeight = document.documentElement.clientHeight;
+    // var bodyClientHeight = document.body.clientHeight;
+    // var bodyOffsetHeight = document.body.offsetHeight;
+    // var bodyScrollHeight= document.body.scrollHeight;
+    // var screenHeight = window.screen.height;
+    // var screenAvailHeight= window.screen.availHeight 
+    // console.log("winInnerHeight:"+winInnerHeight);
+    // console.log("winInnerHeight:"+winInnerHeight);
+    // console.log("documentElementclientHeight:"+documentElementclientHeight);
+    // console.log("bodyClientHeight:"+bodyClientHeight);
+    // console.log("bodyOffsetHeight:"+bodyOffsetHeight);
+    // console.log("bodyScrollHeight:"+bodyScrollHeight);
+    // console.log("screenHeight:"+screenHeight);
+    // console.log("screenAvailHeight:"+screenAvailHeight);
     var keyBtnObj = document.getElementById("key-btn");
     keyBtnObj.style.height = 0.5*window.innerHeight - 10 + "px";
     

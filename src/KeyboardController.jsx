@@ -69,6 +69,20 @@ export default class KeyboardController {
     this.onButtonUp(key[0], key[1]);
   };
 
+  cDown = _ => {
+    var keya = KEYS[74];
+    var keyb = KEYS[90];
+    this.onButtonDown(keya[0], keya[1]);
+    this.onButtonDown(keyb[0], keyb[1]);
+  };
+
+  cUp = _ => {
+    var keya = KEYS[74];
+    var keyb = KEYS[90];
+    this.onButtonUp(keya[0], keya[1]);
+    this.onButtonUp(keyb[0], keyb[1]);
+  };
+
   aDown = _ => {
     var key = KEYS[74];
     this.onButtonDown(key[0], key[1]);
@@ -78,7 +92,6 @@ export default class KeyboardController {
     var key = KEYS[74];
     this.onButtonUp(key[0], key[1]);
   };
-
 
   bDown = _ => {
     var key = KEYS[90];

@@ -80,9 +80,9 @@ export default class FrameTimer {
           fps <= this.desiredFPS - this.calibrationTolerance ||
           fps >= this.desiredFPS + this.calibrationTolerance
         ) {
-          console.log(
-            `Enabling bodge mode. (Desired FPS is ${this.desiredFPS}, actual FPS is ${fps})`
-          );
+          // console.log(
+          //   `Enabling bodge mode. (Desired FPS is ${this.desiredFPS}, actual FPS is ${fps})`
+          // );
           this.startBodgeMode();
         }
       }
