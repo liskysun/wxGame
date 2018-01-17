@@ -6,9 +6,14 @@ import { Link } from "react-router-dom";
 class ListPage extends Component {
   render() {
     const roms = {
-      "super.nes": "super",
+      "super.nes": "super marry",
       "lj65.nes": "lj65",
       "croom.nes": "croom",
+      "xiangqi.nes": "中国象棋",
+      "wulinwaizhuan.nes": "武林外传",
+      "shuangjielong1.nes": "双截龙 1",
+      "shuangjielong2.nes": "双截龙 2",
+      "shuangjielong3.nes": "双截龙 3",
       // "Bubble Bobble (U).nes": "Bubble Bobble",
       // "Castlevania (U) (PRG1).nes": "Castlevania",
       // "Contra (U) [!].nes": "Contra",
