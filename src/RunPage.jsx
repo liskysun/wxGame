@@ -9,7 +9,6 @@ import KeyboardController from "./KeyboardController";
 import Screen from "./Screen";
 import Speakers from "./Speakers";
 import { NES } from "jsnes";
-
   // window.onload = function() {
   //   var judgeStr = window.location.href;
   //   if(judgeStr.includes("run")){
@@ -56,110 +55,124 @@ class RunPage extends Component {
 
   render() {
     return (
-      <div id="no-touch-move" className="RunPage">
-        <div>
-          <nav
-            className="navbar navbar-expand"
-            ref={el => {
-              this.navbar = el;
+      <div id="dont-move">
+      <div className="screen-container" id="screen-height" ref={el => {this.screenContainer = el;}}>
+          <Screen
+            id="vertical-screen-true"
+            ref={screen => { this.screen = screen;}}
+            onGenerateFrame={() => {
+              this.nes.frame();
             }}
-          >
-            <ul className="navbar-nav mr-auto">
-              <li className="navitem">
-                <Link id="back-link"to="/" className="nav-link">
-                  &lsaquo; Back
-                </Link>
-              </li>
-            </ul>
-            <Button
-              outline
-              id="control-btn"
-              onClick={this.toggleControlsModal}
-              className="mr-3"
-            >
-              Controls
-            </Button>
-            <Button
-              outline
-              id="pause-btn"
-              onClick={this.handlePauseResume}
-              disabled={!this.state.running}
-            >
-              {this.state.paused ? "Resume" : "Pause"}
-            </Button>
-
-          </nav>
-          </div>
-        
-        <div className="screen-container"
-             id="screen-height"
-             ref={el => {
-              this.screenContainer = el;
+            onMouseDown={(x, y) => {
+              // console.log("mouseDown")
+              this.nes.zapperMove(x, y);
+              this.nes.zapperFireDown();
             }}
-        >
-            <Screen
-              ref={screen => {
-                this.screen = screen;
-              }}
-              onGenerateFrame={() => {
-                this.nes.frame();
-              }}
-              onMouseDown={(x, y) => {
-                // console.log("mouseDown")
-                this.nes.zapperMove(x, y);
-                this.nes.zapperFireDown();
-              }}
-              onMouseUp={() => {
-                // console.log("mouseUp")
-                this.nes.zapperFireUp();
-              }}
+            onMouseUp={() => {
+              // console.log("mouseUp")
+              this.nes.zapperFireUp();
+            }}
+          />
+            <ControlsModal
+              isOpen={this.state.controlsModal}
+              toggle={this.toggleControlsModal}
             />
-              <ControlsModal
-                isOpen={this.state.controlsModal}
-                toggle={this.toggleControlsModal}
-              />
-        </div>
-        <div id="key-btn">
-            <div className="key-top-region"> 
-              <div className="keys-start">
-              <button 
-              id="back-img"
-              onClick={this.backList}
+      </div>
+        <div id="vertical-screen" className="RunPage">
+          <div>
+            <nav
+              className="navbar navbar-expand"
+              ref={el => {
+                this.navbar = el;
+              }}
+            >
+              <ul className="navbar-nav mr-auto">
+                <li className="navitem">
+                  <Link id="back-link"to="/" className="nav-link">
+                    &lsaquo; Back
+                  </Link>
+                </li>
+              </ul>
+              <Button
+                outline
+                id="control-btn"
+                onClick={this.toggleControlsModal}
+                className="mr-3"
               >
+                Controls
+              </Button>
+              <Button
+                outline
+                id="pause-btn"
+                onClick={this.handlePauseResume}
+                disabled={!this.state.running}
+              >
+                {this.state.paused ? "Resume" : "Pause"}
+              </Button>
+            </nav>
+          </div>
+          
 
-              </button>
-                <Button
-                  outline
-                  color="primary"
-                  id="start-btn"
-                  onClick={this.vitualJump}
+
+          <div id="key-btn">
+              <div className="key-top-region"> 
+                <div className="keys-start">
+                <button 
+                id="back-img"
+                onClick={this.backList}
                 >
-                </Button>
-              </div>
-              <div className="keys-select">
-                <Button
-                  outline
-                  color="primary"
-                  id="select-btn"
-                  onClick={this.vitualJump}
-                >
-                </Button>
-              </div>
-            </div>
 
-            <div className="key-bottom-region">
-
-              <div className="direction-keys">
-
-                <div className="keys-up">
+                </button>
                   <Button
-                      outline
-                      color="primary"
-                      id="up-btn"
-                      onClick={this.vitualJump}
-                    >
-                    </Button>
+                    outline
+                    color="primary"
+                    id="start-btn"
+                    onClick={this.vitualJump}
+                  >
+                  </Button>
                 </div>
+                <div id="off-hidden" className="keys-off">
+                  <Button
+                    outline
+                    color="primary"
+                    id="off-btn"
+                    onClick={this.switchListenerOn}
+                  >
+                  </Button>
+                </div>
+                <div id="on-hidden" className="keys-on">
+                  <Button
+                    outline
+                    color="primary"
+                    id="on-btn"
+                    onClick={this.switchListenerOff}
+                  >
+                  </Button>
+                </div>
+                <div className="keys-select">
+                  <Button
+                    outline
+                    color="primary"
+                    id="select-btn"
+                    onClick={this.vitualJump}
+                  >
+                  </Button>
+                </div>
+              </div>
+
+              <div className="key-bottom-region">
+
+                <div className="direction-keys">
+
+                  <div className="keys-up">
+                    <Button
+                        outline
+                        color="primary"
+                        id="up-btn"
+                        onClick={this.vitualJump}
+                      >
+                      </Button>
+                  </div>
                   <div className="keys-left">
                     <Button
                       outline
@@ -178,55 +191,154 @@ class RunPage extends Component {
                     >
                     </Button>
                   </div>
-                <div className="keys-down">
-                  <Button
-                    outline
-                    color="primary"
-                    id="down-btn"
-                    onClick={this.vitualJump}
-                  >
-                  </Button>
-                </div>
-
-              </div>
-
-              <div className="function-keys">
-
-                <div className="keys-b">
-                  <Button
-                    outline
-                    color="primary"
-                    id="b-btn"
-                    onClick={this.vitualJump}
-                  >
-                  </Button>
-                </div>
-                <div className="keys-ac">
-                
-                  <div className="keys-a">
+                  <div className="keys-down">
                     <Button
                       outline
                       color="primary"
-                      id="a-btn"
+                      id="down-btn"
                       onClick={this.vitualJump}
                     >
                     </Button>
                   </div>
-                  <div className="keys-c">
+                </div>
+
+                <div className="function-keys">
+                  <div className="keys-b">
                     <Button
                       outline
                       color="primary"
-                      id="c-btn"
+                      id="b-btn"
                       onClick={this.vitualJump}
                     >
                     </Button>
                   </div>
-
-
+                  <div className="keys-ac">
+                    <div className="keys-a">
+                      <Button
+                        outline
+                        color="primary"
+                        id="a-btn"
+                        onClick={this.vitualJump}
+                      >
+                      </Button>
+                    </div>
+                    <div className="keys-c">
+                      <Button
+                        outline
+                        color="primary"
+                        id="c-btn"
+                        onClick={this.vitualJump}
+                      >
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
           </div>
+        </div>
+        <div id="cross-screen" className="RunPage">
+          <div id="screen-left" ref={el => {this.leftScreenContainer = el;}}>
+              <div id="cross-start-btn">
+                <Button
+                  outline
+                  color="primary"
+                  id="cross-startBtn"
+                >
+                </Button>
+              </div>
+              <div id="cross-off-on-btn">
+                <div id="cross-off-btn">
+                  <Button
+                    outline
+                    color="primary"
+                    id="cross-offbtn"
+                    onClick={this.switchListenerOn}
+                  >
+                  </Button>
+                </div>
+                <div id="cross-on-btn">
+                  <Button
+                    outline
+                    color="primary"
+                    id="cross-onBtn"
+                    onClick={this.switchListenerOff}
+                  >
+                  </Button>
+                </div>
+              </div>
+              <div id="cross-up-btn">
+                <Button
+                  outline
+                  color="primary"
+                  id="cross-upBtn"
+                >
+                </Button>
+              </div>
+              <div id="cross-left-right-btn">
+                <div id="cross-left-btn">
+
+                <Button
+                  outline
+                  color="primary"
+                  id="cross-leftBtn"
+                >
+                </Button>
+
+                </div>
+                <div id="cross-right-btn">
+                <Button
+                  outline
+                  color="primary"
+                  id="cross-rightBtn"
+                >
+                </Button>
+                </div>
+              </div>
+              <div id="cross-down-btn">
+                <Button
+                  outline
+                  color="primary"
+                  id="cross-downBtn"
+                >
+                </Button>
+              </div>
           </div>
+          <div id="screen-right" ref={el => {this.rightScreenContainer = el;}}>
+              <div id="cross-select-btn">
+                <Button
+                  outline
+                  color="primary"
+                  id="cross-selectBtn"
+                >
+                </Button>
+              </div>
+              <div id="cross-b-btn">
+                <Button
+                  outline
+                  color="primary"
+                  id="cross-bBtn"
+                >
+                </Button>
+              </div>
+              <div id="cross-a-btn">
+                <Button
+                  outline
+                  color="primary"
+                  id="cross-aBtn"
+                >
+                </Button>
+              </div>
+              <div id="cross-c-btn">
+                <Button
+                  outline
+                  color="primary"
+                  id="cross-cBtn"
+                >
+                </Button>
+              </div>
+
+          </div>
+        </div>
       </div>
     );
   }
@@ -258,6 +370,7 @@ class RunPage extends Component {
         }
       }
     });
+
     this.nes = new NES({
       onFrame: this.screen.setBuffer,
       onStatusUpdate: console.log,
@@ -273,9 +386,11 @@ class RunPage extends Component {
       onButtonDown: this.nes.buttonDown,
       onButtonUp: this.nes.buttonUp
     });
+
     document.addEventListener("keydown", this.keyboardController.handleKeyDown);
     document.addEventListener("keyup", this.keyboardController.handleKeyUp);
     document.addEventListener("keypress",this.keyboardController.handleKeyPress);
+
     document.getElementById("a-btn").addEventListener("mousedown",this.keyboardController.aDown);
     document.getElementById("a-btn").addEventListener("mouseup",this.keyboardController.aUp);
     document.getElementById("b-btn").addEventListener("mousedown",this.keyboardController.bDown);
@@ -292,31 +407,66 @@ class RunPage extends Component {
     document.getElementById("select-btn").addEventListener("mouseup",this.keyboardController.selectUp);
     document.getElementById("start-btn").addEventListener("mousedown",this.keyboardController.startDown);
     document.getElementById("start-btn").addEventListener("mouseup",this.keyboardController.startUp);
-    document.getElementById("a-btn").addEventListener("touchstart",this.keyboardController.aDown);
-    document.getElementById("a-btn").addEventListener("touchend",this.keyboardController.aUp);
-    document.getElementById("c-btn").addEventListener("touchstart",this.keyboardController.cDown);
-    document.getElementById("c-btn").addEventListener("touchend",this.keyboardController.cUp);
-    // document.getElementById("test-a").addEventListener("touchstart",this.keyboardController.aDown);
-    // document.getElementById("test-a").addEventListener("touchend",this.keyboardController.aUp);
-    document.getElementById("b-btn").addEventListener("touchstart",this.keyboardController.bDown);
-    document.getElementById("b-btn").addEventListener("touchend",this.keyboardController.bUp);
-    document.getElementById("left-btn").addEventListener("touchstart",this.keyboardController.leftDown);
-    document.getElementById("left-btn").addEventListener("touchend",this.keyboardController.leftUp);
-    document.getElementById("up-btn").addEventListener("touchstart",this.keyboardController.upDown);
-    document.getElementById("up-btn").addEventListener("touchend",this.keyboardController.upUp);
-    document.getElementById("down-btn").addEventListener("touchstart",this.keyboardController.downDown);
-    document.getElementById("down-btn").addEventListener("touchend",this.keyboardController.downUp);
-    document.getElementById("right-btn").addEventListener("touchstart",this.keyboardController.rightDown);
-    document.getElementById("right-btn").addEventListener("touchend",this.keyboardController.rightUp);
-    document.getElementById("select-btn").addEventListener("touchstart",this.keyboardController.selectDown);
-    document.getElementById("select-btn").addEventListener("touchend",this.keyboardController.selectUp);
-    document.getElementById("start-btn").addEventListener("touchstart",this.keyboardController.startDown);
-    document.getElementById("start-btn").addEventListener("touchend",this.keyboardController.startUp);
+    //竖屏的监听
+    this.keyAddListener("a-btn", "touchstart", this.keyboardController.aDown);
+    this.keyAddListener("a-btn", "touchend", this.keyboardController.aUp);
+    this.keyAddListener("c-btn", "touchstart", this.keyboardController.cDown);
+    this.keyAddListener("c-btn", "touchend", this.keyboardController.cUp);
+    this.keyAddListener("b-btn", "touchstart", this.keyboardController.bDown);
+    this.keyAddListener("b-btn", "touchend", this.keyboardController.bUp);
+    this.keyAddListener("left-btn", "touchstart", this.keyboardController.leftDown);
+    this.keyAddListener("left-btn", "touchend", this.keyboardController.leftUp);
+    this.keyAddListener("up-btn", "touchstart", this.keyboardController.upDown);
+    this.keyAddListener("up-btn", "touchend", this.keyboardController.upUp);
+    this.keyAddListener("down-btn", "touchstart", this.keyboardController.downDown);
+    this.keyAddListener("down-btn", "touchend", this.keyboardController.downUp);
+    this.keyAddListener("right-btn", "touchstart", this.keyboardController.rightDown);
+    this.keyAddListener("right-btn", "touchend", this.keyboardController.rightUp);
+    this.keyAddListener("select-btn", "touchstart", this.keyboardController.selectDown);
+    this.keyAddListener("select-btn", "touchend", this.keyboardController.selectUp);
+    this.keyAddListener("start-btn", "touchstart", this.keyboardController.startDown);
+    this.keyAddListener("start-btn", "touchend", this.keyboardController.startUp);
+    //横屏的监听
+    this.keyAddListener("cross-aBtn", "touchstart", this.keyboardController.aDown);
+    this.keyAddListener("cross-aBtn", "touchend", this.keyboardController.aUp);
+    this.keyAddListener("cross-cBtn", "touchstart", this.keyboardController.cDown);
+    this.keyAddListener("cross-cBtn", "touchend", this.keyboardController.cUp);
+    this.keyAddListener("cross-bBtn", "touchstart", this.keyboardController.bDown);
+    this.keyAddListener("cross-bBtn", "touchend", this.keyboardController.bUp);
+    this.keyAddListener("cross-leftBtn", "touchstart", this.keyboardController.leftDown);
+    this.keyAddListener("cross-leftBtn", "touchend", this.keyboardController.leftUp);
+    this.keyAddListener("cross-upBtn", "touchstart", this.keyboardController.upDown);
+    this.keyAddListener("cross-upBtn", "touchend", this.keyboardController.upUp);
+    this.keyAddListener("cross-downBtn", "touchstart", this.keyboardController.downDown);
+    this.keyAddListener("cross-downBtn", "touchend", this.keyboardController.downUp);
+    this.keyAddListener("cross-rightBtn", "touchstart", this.keyboardController.rightDown);
+    this.keyAddListener("cross-rightBtn", "touchend", this.keyboardController.rightUp);
+    this.keyAddListener("cross-selectBtn", "touchstart", this.keyboardController.selectDown);
+    this.keyAddListener("cross-selectBtn", "touchend", this.keyboardController.selectUp);
+    this.keyAddListener("cross-startBtn", "touchstart", this.keyboardController.startDown);
+    this.keyAddListener("cross-startBtn", "touchend", this.keyboardController.startUp);
 
+    window.addEventListener("orientationchange", function() {
+      var screenSt = (window.innerHeight)/(window.innerWidth);
+      if(screenSt<1){
+        //变成竖屏
+        document.getElementById("vertical-screen").style.display="block";
+        document.getElementById("cross-screen").style.display="none";
+      }else{
+        //变成横屏
+        document.getElementById("vertical-screen").style.display="none";
+        document.getElementById("cross-screen").style.display="block";
+      }
+    }, false);
     window.addEventListener("resize", this.layout);
     this.layout();
     this.load();
   }
+
+  keyAddListener(domKey, eventKey, funKey) {
+    document.getElementById(domKey).addEventListener(eventKey,funKey);
+  }
+
   componentWillUnmount() {
     this.stop();
     document.removeEventListener("keydown", this.keyboardController.handleKeyDown);
@@ -326,10 +476,23 @@ class RunPage extends Component {
   }
 
   load = () => {
+    //禁止桌面拖动
+    var screenSt = (window.innerHeight)/(window.innerWidth);
+    if(screenSt<1){
+      //变成竖屏
+      document.getElementById("vertical-screen").style.display="none";
+      document.getElementById("cross-screen").style.display="block";
+    }else{
+      //变成横屏
+      document.getElementById("vertical-screen").style.display="block";
+      document.getElementById("cross-screen").style.display="none";
+    }
+
+    var dontMove = document.getElementById("dont-move");
+    dontMove.ontouchmove = function(e){ e.preventDefault(); };
+    //禁止微信弹以浏览器打开
     document.oncontextmenu = function (e) { e.preventDefault();};
-    var noTouch = document.getElementById("no-touch-move");
-    noTouch.ontouchmove = function(e){ e.preventDefault(); };
-    document.oncontextmenu = function (e) { e.preventDefault();};
+
     if (this.props.match.params.rom) {
       const path = config.BASE_ROM_URL + this.props.match.params.rom;
       console.log(path);
@@ -383,35 +546,70 @@ class RunPage extends Component {
   };
   backList = _ => {
     window.location.href = "/";
-  }
+  };
+
+  switchListenerOn = _ => {
+    //添加新监听
+    // console.log("D");
+    var offBtn = document.getElementById("off-hidden");
+    var onBtn = document.getElementById("on-hidden");
+    var crossOffBtn = document.getElementById("cross-off-btn");
+    var crossOnBtn = document.getElementById("cross-on-btn");
+
+    offBtn.style.display = "none";
+    onBtn.style.display = "inline-block";
+    crossOffBtn.style.display = "none";
+    crossOnBtn.style.display = "inline-block";
+
+    document.getElementById("a-btn").addEventListener("touchstart",this.keyboardController.aLoopDown);
+    document.getElementById("cross-aBtn").addEventListener("touchstart",this.keyboardController.aLoopDown);
+
+    document.getElementById("b-btn").addEventListener("touchstart",this.keyboardController.bLoopDown);
+    document.getElementById("cross-bBtn").addEventListener("touchstart",this.keyboardController.bLoopDown);
+
+    document.getElementById("c-btn").addEventListener("touchstart",this.keyboardController.cLoopDown);
+    document.getElementById("cross-cBtn").addEventListener("touchstart",this.keyboardController.cLoopDown);
+  };
+
+  switchListenerOff = _ => {
+    var offBtn = document.getElementById("off-hidden");
+    var onBtn = document.getElementById("on-hidden");
+    var crossOffBtn = document.getElementById("cross-off-btn");
+    var crossOnBtn = document.getElementById("cross-on-btn");
+
+    offBtn.style.display = "inline-block";
+    onBtn.style.display = "none";
+    crossOffBtn.style.display = "inline-block";
+    crossOnBtn.style.display = "none";
+
+    document.getElementById("a-btn").addEventListener("touchstart",this.keyboardController.aDown);
+    document.getElementById("cross-aBtn").addEventListener("touchstart",this.keyboardController.aDown);
+
+    document.getElementById("b-btn").addEventListener("touchstart",this.keyboardController.bDown);
+    document.getElementById("cross-bBtn").addEventListener("touchstart",this.keyboardController.bDown);
+
+    document.getElementById("c-btn").addEventListener("touchstart",this.keyboardController.cDown);
+    document.getElementById("cross-cBtn").addEventListener("touchstart",this.keyboardController.cDown);
+  };
+
   layout = () => {
-    // var windowHeight = window.screen.height;
-    // var strFoo = document.body.scrollHeight;
-    // console.log("strFoo:"+strFoo);
-    // var navHeight = 70;
-    // let screenHeight = 0.5*window.innerHeight;
-    // keyBtnObj.style.height = windowHeight - screenHeight + "px";
-    // this.screenContainer.style.height = `${window.innerHeight * 0.5}px`;
-    // var winInnerHeight = window.innerHeight;
-    // var documentElementclientHeight = document.documentElement.clientHeight;
-    // var bodyClientHeight = document.body.clientHeight;
-    // var bodyOffsetHeight = document.body.offsetHeight;
-    // var bodyScrollHeight= document.body.scrollHeight;
-    // var screenHeight = window.screen.height;
-    // var screenAvailHeight= window.screen.availHeight 
-    // console.log("winInnerHeight:"+winInnerHeight);
-    // console.log("winInnerHeight:"+winInnerHeight);
-    // console.log("documentElementclientHeight:"+documentElementclientHeight);
-    // console.log("bodyClientHeight:"+bodyClientHeight);
-    // console.log("bodyOffsetHeight:"+bodyOffsetHeight);
-    // console.log("bodyScrollHeight:"+bodyScrollHeight);
-    // console.log("screenHeight:"+screenHeight);
-    // console.log("screenAvailHeight:"+screenAvailHeight);
+    //竖屏
     var keyBtnObj = document.getElementById("key-btn");
     keyBtnObj.style.height = 0.5*window.innerHeight - 10 + "px";
-    
+    //横屏
+    this.leftScreenContainer.style.height = `${window.innerHeight}px`
+    this.rightScreenContainer.style.height = `${window.innerHeight}px`
+    var screenSt = (window.innerHeight)/(window.innerWidth);
+    if(screenSt<1){
+      // 横屏
+    this.screenContainer.style.height = `${window.innerHeight}px`;
+    this.screenContainer.style.width = `${window.innerWidth*0.6}px`;
+    this.screenContainer.style.marginLeft = `20%`;
+    }else{
     this.screenContainer.style.height = `${window.innerHeight * 0.5}px`;
     this.screenContainer.style.width = `${window.innerWidth}px`;
+    this.screenContainer.style.marginLeft = `0%`;
+  }
     this.screen.fitInParent();
   };
 

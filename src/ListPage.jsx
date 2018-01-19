@@ -22,7 +22,6 @@ class ListPage extends Component {
       "shuangjielong3wudi.nes": "双截龙 3 无敌版",
       "croom.nes": "水果对对碰",
       "xiangqi.nes": "中国象棋",
-      "maoxiandao.nes": "test错误",
       // "Bubble Bobble (U).nes": "Bubble Bobble",
       // "Castlevania (U) (PRG1).nes": "Castlevania",
       // "Contra (U) [!].nes": "Contra",

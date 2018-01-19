@@ -2,6 +2,7 @@ import {
   Controller
 } from "jsnes";
 
+
 // Mapping keyboard code to [controller, button]
 const KEYS = {
   74: [1, Controller.BUTTON_A], // J
@@ -22,6 +23,7 @@ const KEYS = {
   100: [2, Controller.BUTTON_LEFT], // Num-4
   102: [2, Controller.BUTTON_RIGHT], // Num-6
 };
+
 
 export default class KeyboardController {
   constructor(options) {
@@ -82,7 +84,26 @@ export default class KeyboardController {
     this.onButtonUp(keya[0], keya[1]);
     this.onButtonUp(keyb[0], keyb[1]);
   };
+  cLoopDown = _ => {
+    var offBtn = document.getElementById("off-hidden");
+    var offBtnSt = offBtn.style.display;
 
+    var keya = KEYS[74];
+    var keyb = KEYS[90];
+
+    if(offBtnSt === "none"){
+      var cReturn = _ => {
+        // console.log("延时:10000ms");
+        this.onButtonUp(keya[0], keya[1]);
+        this.onButtonUp(keyb[0], keyb[1]);
+      }
+      this.onButtonDown(keya[0], keya[1]);
+      this.onButtonDown(keyb[0], keyb[1]);
+      setTimeout(cReturn, 350);//设置跳起结束时间
+      setTimeout(this.cLoopDown, 374);//重新跳起时间
+    }
+
+  };
   aDown = _ => {
     var key = KEYS[74];
     this.onButtonDown(key[0], key[1]);
@@ -93,6 +114,23 @@ export default class KeyboardController {
     this.onButtonUp(key[0], key[1]);
   };
 
+  aLoopDown = _ => {
+    var offBtn = document.getElementById("off-hidden");
+    var offBtnSt = offBtn.style.display;
+    var key = KEYS[74];
+
+    if(offBtnSt === "none"){
+      var aReturn = _ => {
+        // console.log("延时:10000ms");
+        this.onButtonUp(key[0], key[1]);
+      }
+      this.onButtonDown(key[0], key[1]);
+      setTimeout(aReturn, 350);//设置跳起结束时间
+      setTimeout(this.aLoopDown, 374);//重新跳起时间
+    }
+
+  };
+
   bDown = _ => {
     var key = KEYS[90];
     this.onButtonDown(key[0], key[1]);
@@ -101,6 +139,23 @@ export default class KeyboardController {
   bUp = _ => {
     var key = KEYS[90];
     this.onButtonUp(key[0], key[1]);
+  };
+
+  bLoopDown = _ => {
+    var offBtn = document.getElementById("off-hidden");
+    var offBtnSt = offBtn.style.display;
+    var key = KEYS[90];
+
+    if(offBtnSt === "none"){
+      var bReturn = _ => {
+        // console.log("延时:10000ms");
+        this.onButtonUp(key[0], key[1]);
+      }
+      this.onButtonDown(key[0], key[1]);
+      setTimeout(bReturn, 350);//设置跳起结束时间
+      setTimeout(this.bLoopDown, 374);//重新跳起时间
+    }
+
   };
 
   leftDown = _ => {

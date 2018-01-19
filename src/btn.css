@@ -6,11 +6,19 @@
         height: 100% !important;
         width: 100% !important;
         opacity: 0;
-        color: white;
     }
 
     button:active {
-        opacity: 0.5;
+        opacity: 0;
+    }
+
+    #vertical-screen {
+        /*display: none;*/
+        background: black;
+        position: absolute;
+        display: block;
+        bottom: 0px;
+        width: 100%;
     }
 
     .mb-4 a {
@@ -44,7 +52,8 @@
     }
 
     .screen-container {
-        position: relative;
+        position: absolute;
+        margin-left: 0%;
     }
 
     .Screen {
@@ -56,7 +65,7 @@
         position: relative;
         text-align: center;
         margin: 0 auto;
-        margin-top: 5px;
+        margin-top: 10px;
         width: 98%;
         height: 50%;
         color: black;
@@ -102,6 +111,23 @@
         width: 29%;
         height: 65%;
     }
+
+    .keys-off {
+        display: inline-block;
+        width: 10%;
+        height: 50%;
+        background-image: url(img/key-off.png);
+    }
+
+
+    .keys-on {
+        display: none;
+        width: 10%;
+        height: 50%;
+        background-image: url(img/key-on.png);
+    }
+
+
 
     .direction-keys,
     .function-keys {
@@ -186,7 +212,7 @@
     }
 
     .keys-start {
-        margin-right: 20%;
+        margin-right: 10%;
         background: url(img/key-start.png) no-repeat;
     }
 
@@ -197,6 +223,7 @@
     }
 
     .keys-select {
+        margin-left: 10%;
         background: url(img/key-select.png) no-repeat;
     }
 
@@ -239,4 +266,154 @@
     .keys-right {
         margin-left: 7%;
         background: url(img/key-right.png) no-repeat;
+    }
+    /**********************************************************************************/
+
+    #cross-screen {
+        display: none;
+        background: black;
+        text-align: center;
+        color: black;
+    }
+
+    #cross-screen div {
+        background-size: 100% 100% !important;
+    }
+
+    #key-btn-hidden {
+        display: none;
+    }
+
+    #cross-screen div {
+        /*border: 1px black solid;*/
+    }
+
+    #screen-left,
+    #screen-right {
+        vertical-align: top;
+        display: inline-block;
+        width: 20%;
+        height: 100%;
+    }
+
+    #screen-left {
+        margin-right: 60%;
+    }
+
+    #cross-screen-height {
+        display: inline-block !important;
+        width: 59% !important;
+        height: 100% !important;
+    }
+
+    #cross-start-btn,
+
+    #cross-up-btn,
+    #cross-down-btn {
+        height: 20%;
+        width: 100%;
+        margin-left: 35%;
+    }
+
+    #cross-left-right-btn {
+        height: 11%;
+    }
+
+    #cross-left-btn,
+    #cross-right-btn {
+        display: inline-block;
+        width: 50%;
+        height: 100%;
+    }
+
+    #cross-select-btn,
+    #cross-b-btn,
+    #cross-c-btn,
+    #cross-a-btn {
+        height: 25%;
+        width: 100%;
+    }
+
+    #cross-start-btn {
+        height: 11%;
+        width: 54%;
+        margin-left: 22%;
+        margin-top: 15%;
+        background-image: url(img/key-start.png);
+    }
+
+    #cross-select-btn {
+        height: 11%;
+        width: 54%;
+        margin-left: 22%;
+        margin-top: 15%;
+        background-image: url(img/key-select.png);
+    }
+
+    #cross-off-on-btn {
+        height: 15%;
+        margin-top: 30%;
+    }
+
+    #cross-on-btn,
+    #cross-off-btn {
+        width: 35%;
+        height: 100%;
+        display: inline-block;
+    }
+
+    #cross-on-btn {
+        display: none;
+        background-image: url(img/key-on.png);
+    }
+
+    #cross-off-btn {
+        background-image: url(img/key-off.png);
+    }
+
+    #cross-left-btn {
+        width: 47%;
+        margin-right: 5%;
+        background-image: url(img/key-left.png);
+    }
+
+    #cross-right-btn {
+        width: 47%;
+        background-image: url(img/key-right.png);
+    }
+
+    #cross-up-btn {
+        width: 30%;
+        height: 17%;
+        margin-top: 15%;
+        background-image: url(img/key-up.png);
+    }
+
+    #cross-down-btn {
+        width: 30%;
+        height: 17%;
+        background-image: url(img/key-down.png);
+    }
+
+    #cross-b-btn,
+    #cross-c-btn,
+    #cross-a-btn {
+        width: 45%;
+        height: 17%;
+    }
+
+    #cross-b-btn {
+        margin-top: 75%;
+        margin-left: 10%;
+        background-image: url(img/key-b.png);
+    }
+
+    #cross-c-btn {
+        margin-left: 10%;
+        background-image: url(img/key-c.png);
+    }
+
+    #cross-a-btn {
+        margin-left: 53%;
+        background-image: url(img/key-a.png);
     }

@@ -13,7 +13,6 @@ Controller.BUTTON_UP = 4;
 Controller.BUTTON_DOWN = 5;
 Controller.BUTTON_LEFT = 6;
 Controller.BUTTON_RIGHT = 7;
-
 Controller.prototype = {
   buttonDown: function(key) {
     this.state[key] = 0x41;
