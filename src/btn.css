@@ -118,8 +118,6 @@
         height: 50%;
         background-image: url(img/key-off.png);
     }
-
-
     .keys-on {
         display: none;
         width: 10%;

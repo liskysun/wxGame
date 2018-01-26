@@ -2,7 +2,6 @@ import {
   Controller
 } from "jsnes";
 
-
 // Mapping keyboard code to [controller, button]
 const KEYS = {
   74: [1, Controller.BUTTON_A], // J
@@ -23,7 +22,6 @@ const KEYS = {
   100: [2, Controller.BUTTON_LEFT], // Num-4
   102: [2, Controller.BUTTON_RIGHT], // Num-6
 };
-
 
 export default class KeyboardController {
   constructor(options) {
@@ -52,150 +50,139 @@ export default class KeyboardController {
   };
 
   startDown = _ => {
-    var key = KEYS[13];
-    this.onButtonDown(key[0], key[1]);
+    this.btnDown(13);
   };
 
   startUp = _ => {
-    var key = KEYS[13];
-    this.onButtonUp(key[0], key[1]);
+    this.btnUp(13);
   };
 
   selectDown = _ => {
-    var key = KEYS[17];
-    this.onButtonDown(key[0], key[1]);
+    this.btnDown(17);
   };
 
   selectUp = _ => {
-    var key = KEYS[17];
-    this.onButtonUp(key[0], key[1]);
+    this.btnUp(17);
   };
 
   cDown = _ => {
-    var keya = KEYS[74];
-    var keyb = KEYS[90];
-    this.onButtonDown(keya[0], keya[1]);
-    this.onButtonDown(keyb[0], keyb[1]);
+    this.btnDown(74);
+    this.btnDown(90);
   };
 
   cUp = _ => {
-    var keya = KEYS[74];
-    var keyb = KEYS[90];
-    this.onButtonUp(keya[0], keya[1]);
-    this.onButtonUp(keyb[0], keyb[1]);
+    this.btnUp(74);
+    this.btnUp(90);
   };
-  cLoopDown = _ => {
-    var offBtn = document.getElementById("off-hidden");
-    var offBtnSt = offBtn.style.display;
 
-    var keya = KEYS[74];
-    var keyb = KEYS[90];
-
-    if(offBtnSt === "none"){
-      var cReturn = _ => {
-        // console.log("延时:10000ms");
-        this.onButtonUp(keya[0], keya[1]);
-        this.onButtonUp(keyb[0], keyb[1]);
-      }
-      this.onButtonDown(keya[0], keya[1]);
-      this.onButtonDown(keyb[0], keyb[1]);
-      setTimeout(cReturn, 350);//设置跳起结束时间
-      setTimeout(this.cLoopDown, 374);//重新跳起时间
-    }
-
-  };
   aDown = _ => {
-    var key = KEYS[74];
-    this.onButtonDown(key[0], key[1]);
+    this.btnDown(74);
   };
 
   aUp = _ => {
-    var key = KEYS[74];
-    this.onButtonUp(key[0], key[1]);
-  };
-
-  aLoopDown = _ => {
-    var offBtn = document.getElementById("off-hidden");
-    var offBtnSt = offBtn.style.display;
-    var key = KEYS[74];
-
-    if(offBtnSt === "none"){
-      var aReturn = _ => {
-        // console.log("延时:10000ms");
-        this.onButtonUp(key[0], key[1]);
-      }
-      this.onButtonDown(key[0], key[1]);
-      setTimeout(aReturn, 350);//设置跳起结束时间
-      setTimeout(this.aLoopDown, 374);//重新跳起时间
-    }
-
+    this.btnUp(74);
   };
 
   bDown = _ => {
-    var key = KEYS[90];
-    this.onButtonDown(key[0], key[1]);
+    this.btnDown(90);
   };
 
   bUp = _ => {
-    var key = KEYS[90];
-    this.onButtonUp(key[0], key[1]);
-  };
-
-  bLoopDown = _ => {
-    var offBtn = document.getElementById("off-hidden");
-    var offBtnSt = offBtn.style.display;
-    var key = KEYS[90];
-
-    if(offBtnSt === "none"){
-      var bReturn = _ => {
-        // console.log("延时:10000ms");
-        this.onButtonUp(key[0], key[1]);
-      }
-      this.onButtonDown(key[0], key[1]);
-      setTimeout(bReturn, 350);//设置跳起结束时间
-      setTimeout(this.bLoopDown, 374);//重新跳起时间
-    }
-
+    this.btnUp(90);
   };
 
   leftDown = _ => {
-    var key = KEYS[65];
-    this.onButtonDown(key[0], key[1]);
+    this.btnDown(65);
   };
 
   leftUp = _ => {
-    var key = KEYS[65];
-    this.onButtonUp(key[0], key[1]);
+    this.btnUp(65);
   };
 
   rightDown = _ => {
-    var key = KEYS[68];
-    this.onButtonDown(key[0], key[1]);
+    this.btnDown(68);
   };
 
   rightUp = _ => {
-    var key = KEYS[68];
-    this.onButtonUp(key[0], key[1]);
+    this.btnUp(68);
   };
 
   upDown = _ => {
-    var key = KEYS[87];
-    this.onButtonDown(key[0], key[1]);
+    this.btnDown(87);
+
   };
 
   upUp = _ => {
-    var key = KEYS[87];
-    this.onButtonUp(key[0], key[1]);
+    this.btnUp(87);
   };
 
   downDown = _ => {
-    var key = KEYS[83];
-    this.onButtonDown(key[0], key[1]);
+    this.btnDown(83);
+
   };
 
   downUp = _ => {
-    var key = KEYS[83];
+    this.btnUp(83);
+  };
+
+  aLoopDown = _ => {
+    var offBtnSt = this.getBtnSt();
+    if (offBtnSt === "none") {
+      //为了获取btn改变的状态使其停止
+      this.btnLoopDown(74);
+      setTimeout(this.aLoopDown, 374);
+    }
+  };
+
+  bLoopDown = _ => {
+    var offBtnSt = this.getBtnSt();
+    if (offBtnSt === "none") {
+      this.btnLoopDown(90);
+      setTimeout(this.bLoopDown, 374);
+    }
+  };
+
+  cLoopDown = _ => {
+    var offBtnSt = this.getBtnSt();
+    if (offBtnSt === "none") {
+      this.btnLoopDown(74);
+      this.btnLoopDown(90);
+      setTimeout(this.cLoopDown, 374);
+    }
+  };
+  
+  getBtnSt = _ => {
+    var offBtn = document.getElementById("off-hidden");
+    //当打开连发返回游戏列表页面,防止报null错误
+    if (offBtn === null) {
+      offBtn = document.getElementById("root");
+    }
+    var offBtnSt = offBtn.style.display;
+    return offBtnSt;
+  };
+
+  btnDown = (btnNum) => {
+    var key = KEYS[btnNum];
+    this.onButtonDown(key[0], key[1]);
+  };
+
+  btnUp = (btnNum) => {
+    var key = KEYS[btnNum];
     this.onButtonUp(key[0], key[1]);
+  };
+
+  btnLoopDown = (btnNum) => {
+      var key = KEYS[btnNum];
+      //作为转变状态后停止的开关
+      var btnReturn = _ => {
+        this.onButtonUp(key[0], key[1]);
+      }
+      //设置跳起结束时间 350ms此时间后 
+      // 执行啊aReturn()方法恢复按键的状态(弹起)
+      this.onButtonDown(key[0], key[1]);
+      //重新跳起时间 374ms此时间后 
+      // 再次调用aLoopDown循环这个过程
+      setTimeout(btnReturn, 350);
   };
 
 }

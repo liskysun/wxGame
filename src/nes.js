@@ -13,9 +13,8 @@ var NES = function(opts) {
 
     // FIXME: not actually used except for in PAPU
     preferredFrameRate: 60,
-
-    emulateSound: true,
-    sampleRate: 44100 // Sound sample rate in hz
+    emulateSound: true, //仿真声音
+    sampleRate: 22050 // 线性音频样本的采样率 Sound sample rate in hz44100
   };
   if (typeof opts !== "undefined") {
     var key;
@@ -118,7 +117,6 @@ NES.prototype = {
             break FRAMELOOP;
           }
         }
-
         ppu.curX++;
         if (ppu.curX === 341) {
           ppu.curX = 0;

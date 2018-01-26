@@ -15,7 +15,7 @@ var PAPU = function(nes) {
   this.initCounter = 2048;
   this.channelEnableValue = null;
 
-  this.sampleRate = 44100;
+  this.sampleRate = 44100; //线性音频样本的采样率
 
   this.lengthLookup = null;
   this.dmcFreqLookup = null;

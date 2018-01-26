@@ -127,7 +127,7 @@ class RunPage extends Component {
                     outline
                     color="primary"
                     id="start-btn"
-                    onClick={this.vitualJump}
+                    // onClick={this.autoPlay}
                   >
                   </Button>
                 </div>
@@ -336,7 +336,6 @@ class RunPage extends Component {
                 >
                 </Button>
               </div>
-
           </div>
         </div>
       </div>
@@ -387,10 +386,15 @@ class RunPage extends Component {
       onButtonUp: this.nes.buttonUp
     });
 
+
+    // this.keyAddListener("cross-startBtn", "touchstart", function() {
+    //   this.nes.opts.onAudioSample = this.speakers.writeSample;
+    // });
+
     document.addEventListener("keydown", this.keyboardController.handleKeyDown);
     document.addEventListener("keyup", this.keyboardController.handleKeyUp);
     document.addEventListener("keypress",this.keyboardController.handleKeyPress);
-
+    //模拟屏幕监听
     document.getElementById("a-btn").addEventListener("mousedown",this.keyboardController.aDown);
     document.getElementById("a-btn").addEventListener("mouseup",this.keyboardController.aUp);
     document.getElementById("b-btn").addEventListener("mousedown",this.keyboardController.bDown);
@@ -476,7 +480,9 @@ class RunPage extends Component {
   }
 
   load = () => {
-    //禁止桌面拖动
+    //当从横屏返回游戏列表页面时,防止再次回来以竖屏键盘显示
+
+
     var screenSt = (window.innerHeight)/(window.innerWidth);
     if(screenSt<1){
       //变成竖屏
@@ -488,8 +494,10 @@ class RunPage extends Component {
       document.getElementById("cross-screen").style.display="none";
     }
 
+    //禁止拖动元素
     var dontMove = document.getElementById("dont-move");
     dontMove.ontouchmove = function(e){ e.preventDefault(); };
+
     //禁止微信弹以浏览器打开
     document.oncontextmenu = function (e) { e.preventDefault();};
 
@@ -548,19 +556,33 @@ class RunPage extends Component {
     window.location.href = "/";
   };
 
+  //  = _ => {
+  //   this.nes.opts.onAudioSample = this.speakers.writeSample;
+  // };
+
+  // autoPlay = _ => {
+  //     var myAuto = document.getElementById('myaudio');
+  //     myAuto.play();
+  //   };
+
+  // closePlay = _ => {
+  //     var myAuto = document.getElementById('myaudio');
+  //     myAuto.pause();
+  //     myAuto.load();
+  // };
+
   switchListenerOn = _ => {
-    //添加新监听
-    // console.log("D");
     var offBtn = document.getElementById("off-hidden");
     var onBtn = document.getElementById("on-hidden");
     var crossOffBtn = document.getElementById("cross-off-btn");
     var crossOnBtn = document.getElementById("cross-on-btn");
-
+    //对横竖屏做同步处理,保证横竖屏一致
     offBtn.style.display = "none";
     onBtn.style.display = "inline-block";
     crossOffBtn.style.display = "none";
     crossOnBtn.style.display = "inline-block";
 
+    //为按键添加连发监听(覆盖原先的监听)
     document.getElementById("a-btn").addEventListener("touchstart",this.keyboardController.aLoopDown);
     document.getElementById("cross-aBtn").addEventListener("touchstart",this.keyboardController.aLoopDown);
 
@@ -577,11 +599,13 @@ class RunPage extends Component {
     var crossOffBtn = document.getElementById("cross-off-btn");
     var crossOnBtn = document.getElementById("cross-on-btn");
 
+    //对横竖屏做同步处理,保证横竖屏一致
     offBtn.style.display = "inline-block";
     onBtn.style.display = "none";
     crossOffBtn.style.display = "inline-block";
     crossOnBtn.style.display = "none";
 
+    //为按键添加连发监听(覆盖原先的监听)
     document.getElementById("a-btn").addEventListener("touchstart",this.keyboardController.aDown);
     document.getElementById("cross-aBtn").addEventListener("touchstart",this.keyboardController.aDown);
 
@@ -593,19 +617,21 @@ class RunPage extends Component {
   };
 
   layout = () => {
-    //竖屏
+    // 竖屏 键位的动态尺寸(一个区域)
     var keyBtnObj = document.getElementById("key-btn");
     keyBtnObj.style.height = 0.5*window.innerHeight - 10 + "px";
-    //横屏
+    // 横屏 键位的动态尺寸(两个区域)
     this.leftScreenContainer.style.height = `${window.innerHeight}px`
     this.rightScreenContainer.style.height = `${window.innerHeight}px`
     var screenSt = (window.innerHeight)/(window.innerWidth);
+
     if(screenSt<1){
-      // 横屏
+      // 横屏时 游戏界面位于手机屏幕中间
     this.screenContainer.style.height = `${window.innerHeight}px`;
     this.screenContainer.style.width = `${window.innerWidth*0.6}px`;
     this.screenContainer.style.marginLeft = `20%`;
     }else{
+      // 竖屏时 游戏界面位于手机顶端
     this.screenContainer.style.height = `${window.innerHeight * 0.5}px`;
     this.screenContainer.style.width = `${window.innerWidth}px`;
     this.screenContainer.style.marginLeft = `0%`;
