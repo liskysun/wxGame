@@ -61,11 +61,11 @@ class ListPage extends Component {
         <div className="row justify-content-center">
           <div className="col-md-8">
             <header className="mb-4">
-              <h1 className="mb-3">JSNES</h1>
+              <h1 className="mb-3">SkysunLee</h1>
               <p>A JavaScript NES emulator.</p>
               <p>
-                By <a href="https://fir.sh">Ben Firshman</a>. Source on{" "}
-                <a href="https://github.com/bfirsh/jsnes">GitHub</a>.
+                By <a href="https://fir.sh">SkysunLee</a>. Source on{" "}
+                <a href="https://github.com/liskysun/wxGame">GitHub</a>.
               </p>
             </header>
             <ListGroup className="mb-4">
